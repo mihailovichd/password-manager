@@ -3,14 +3,14 @@ import requests
 from config import API_URL
 
 
-def encrypt(password, alg='sha256') -> str:
+def encrypt_data(password, alg='sha256') -> str:
     h = hashlib.new(alg)
     h.update(password.encode('ascii'))
     return h.hexdigest()
 
 
-def check_password(password) -> bool:
-    password = encrypt(password, 'sha1').upper()
+def check_password_usage(password) -> bool:
+    password = encrypt_data(password, 'sha1').upper()
 
     url = API_URL + password[:5]
     response = requests.get(url)
